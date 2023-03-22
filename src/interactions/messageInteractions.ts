@@ -1,5 +1,4 @@
-import { serverConfig } from "./utils/serverConfig";
-import { discordClient } from "./api/discordClient";
+import { discordClient } from "../api/discordClient";
 
 discordClient.on("interactionCreate", (interaction) => {
   // If not a slash command no-op
@@ -9,5 +8,3 @@ discordClient.on("interactionCreate", (interaction) => {
     interaction.reply("hey wazzup, Powpow is now online!");
   }
 });
-
-discordClient.login(serverConfig.token);
