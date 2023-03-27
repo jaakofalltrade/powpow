@@ -5,7 +5,7 @@ export const getMessageHistory = async (
   interaction: Interaction
 ): Promise<string[]> => {
   const messageHistory = await interaction.channel?.messages.fetch({
-    limit: 10,
+    limit: 25,
   });
 
   if (!messageHistory) return [];
