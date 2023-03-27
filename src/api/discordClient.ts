@@ -8,7 +8,3 @@ export const discordClient = new Client({
     IntentsBitField.Flags.MessageContent,
   ],
 });
-
-discordClient.on("ready", (res) => {
-  console.log(`${res.user.tag} is now online!`);
-});

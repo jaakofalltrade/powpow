@@ -1,4 +1,4 @@
 export enum Env {
-  dev = "DEV",
-  prod = "PROD",
+  DEV = "DEV",
+  PROD = "PROD",
 }

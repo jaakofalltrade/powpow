@@ -1,5 +1,5 @@
 import { serverConfig } from "../utils/serverConfig";
-import { REST, Routes } from "discord.js";
+import { ApplicationCommandOptionType, REST, Routes } from "discord.js";
 
 const commands = [
   {
@@ -8,7 +8,15 @@ const commands = [
   },
   {
     name: "ask",
-    description: "Connects to ChatGPT to answer your question.",
+    description: "Ask our bot Powpow to answer your question.",
+    options: [
+      {
+        name: "question",
+        description: "Question to ask Powpow.",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
   },
 ];
 
