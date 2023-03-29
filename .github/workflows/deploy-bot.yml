@@ -16,9 +16,9 @@ jobs:
             apt install npm
             npm install -g ts-node
             exit 1
-        host: 45.32.57.119
-        user: root
-        key: ${{secrets.SSH_PRIVATE_KEY}}
+          host: ${{secrets.HOST}}
+          user: root
+          key: ${{secrets.SSH_PRIVATE_KEY}}
 
 deploy-to-vultr:
   runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ deploy-to-vultr:
       uses: wlixcc/SFTP-Deploy-Action@v1.2.1
       with:
         username: root
-        server: 45.32.57.119
+        server: ${{secrets.HOST}}
         port: 22
         ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
         local_path: ./*
@@ -56,6 +56,6 @@ add-env-variables:
           echo OPENAI_API_KEY=${{env.OPENAI_KEY}} > .env
           echo CLIENT_ID=${{env.POWPOW_DISCORD_ID}} > .env
           echo $?
-        host: 45.32.57.119
+        host: ${{secrets.HOST}}
         user: root
         key: ${{secrets.SSH_PRIVATE_KEY}}
