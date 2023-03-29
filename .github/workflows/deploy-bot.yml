@@ -11,13 +11,10 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
-            apt update
-            apt install nodejs
-            echo Y
-            apt install npm
-            echo Y
-            npm install -g ts-node
-            echo Y
+            sudo apt update
+            sudo apt install nodejs
+            sudo apt install npm
+            sudo npm install -g ts-node
             exit 1
           host: ${{secrets.HOST}}
           user: root
