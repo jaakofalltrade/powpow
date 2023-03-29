@@ -15,6 +15,7 @@ jobs:
             apt install nodejs
             apt install npm
             npm install -g ts-node
+            exit 1
         host: 45.32.57.119
         user: root
         key: ${{secrets.SSH_PRIVATE_KEY}}
