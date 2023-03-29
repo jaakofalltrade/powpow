@@ -13,8 +13,11 @@ jobs:
           command: |
             apt update
             apt install nodejs
+            echo Y
             apt install npm
+            echo Y
             npm install -g ts-node
+            echo Y
             exit 1
           host: ${{secrets.HOST}}
           user: root
