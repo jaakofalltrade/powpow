@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "register-commands": "ts-node src/scripts/register-commands.ts"
+    "register-commands": "ts-node src/scripts/register-commands.ts",
+    "start:prod": "node src/index.ts"
   },
   "repository": {
     "type": "git",
