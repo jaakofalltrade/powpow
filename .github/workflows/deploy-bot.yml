@@ -15,6 +15,7 @@ jobs:
             apt install nodejs -y
             apt install npm -y
             npm install -g ts-node
+            npm install -g nodemon
           host: ${{secrets.HOST}}
           user: root
           key: ${{secrets.SSH_PRIVATE_KEY}}
