@@ -69,6 +69,6 @@ jobs:
           command: |
             cd ${{env.REPO_NAME}}
             npm install
-        host: ${{secrets.HOST}}
-        user: root
-        key: ${{secrets.SSH_PRIVATE_KEY}}
+          host: ${{secrets.HOST}}
+          user: root
+          key: ${{secrets.SSH_PRIVATE_KEY}}
