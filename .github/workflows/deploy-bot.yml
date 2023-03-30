@@ -15,7 +15,6 @@ jobs:
             apt install nodejs -y
             apt install npm -y
             npm install -g ts-node
-            exit 1
           host: ${{secrets.HOST}}
           user: root
           key: ${{secrets.SSH_PRIVATE_KEY}}
@@ -59,3 +58,17 @@ jobs:
           host: ${{secrets.HOST}}
           user: root
           key: ${{secrets.SSH_PRIVATE_KEY}}
+  
+  install-npm-packages:
+    needs: [add-env-variables, deploy-to-vultr]
+    runs-on: ubuntu-latest
+    steps:
+      - id: create-systemctl-service
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          cd ${{env.REPO_NAME}}
+          npm install
+      host: ${{secrets.HOST}}
+      user: root
+      key: ${{secrets.SSH_PRIVATE_KEY}}
