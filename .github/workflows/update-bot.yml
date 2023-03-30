@@ -21,7 +21,7 @@ jobs:
           args: "-o ConnectTimeout=5"
 
   install-npm-packages:
-    needs: [add-env-variables, deploy-to-vultr]
+    needs: [deploy-to-vultr]
     runs-on: ubuntu-latest
     steps:
       - id: create-systemctl-service
