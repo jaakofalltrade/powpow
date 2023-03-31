@@ -38,7 +38,6 @@ jobs:
   add-env-variables:
     needs: [deploy-to-vultr]
     runs-on: ubuntu-latest
-    timeout-minutes: 2
     env:
       POWPOW_TOKEN: ${{secrets.POWPOW_TOKEN}}
       GUILD_ID: ${{secrets.GUILD_ID}}
@@ -51,10 +50,11 @@ jobs:
           command: |
             cd ${{env.REPO_NAME}}
             touch .env
-            cat TOKEN=${{env.POWPOW_TOKEN}} > .env
-            cat GUILD_ID=${{env.GUILD_ID}} > .env
-            cat OPENAI_API_KEY=${{env.OPENAI_KEY}} > .env
-            cat CLIENT_ID=${{env.POWPOW_DISCORD_ID}} > .env
+            echo TOKEN=${{env.POWPOW_TOKEN}} >> .env
+            echo GUILD_ID=${{env.GUILD_ID}} >> .env
+            echo OPENAI_API_KEY=${{env.OPENAI_KEY}} >> .env
+            echo CLIENT_ID=${{env.POWPOW_DISCORD_ID}} >> .env
+            ls
             echo $?
           host: ${{secrets.HOST}}
           user: root
@@ -64,7 +64,7 @@ jobs:
     needs: [add-env-variables, deploy-to-vultr]
     runs-on: ubuntu-latest
     steps:
-      - id: create-systemctl-service
+      - id: install-npm-packages
         uses: fifsky/ssh-action@master
         with:
           command: |
