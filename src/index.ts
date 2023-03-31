@@ -16,9 +16,7 @@ discordClient.on("interactionCreate", async (interaction) => {
       const question = interaction.options.get("question");
       if (!question?.value) return;
       const messageHistory = await getMessageHistory(interaction);
-      interaction.reply(
-        `${interaction.member?.user} asked "${question.value}"`
-      );
+      interaction.reply(`${interaction.member?.user}: "${question.value}"`);
 
       interaction.channel?.sendTyping();
       const openaiAnswer = await getOpenaiAnswer({
