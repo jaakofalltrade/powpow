@@ -24,7 +24,7 @@ jobs:
     needs: [deploy-to-vultr]
     runs-on: ubuntu-latest
     steps:
-      - id: create-systemctl-service
+      - id: install-npm-packages
         uses: fifsky/ssh-action@master
         with:
           command: |
