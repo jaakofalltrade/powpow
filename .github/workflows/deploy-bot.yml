@@ -51,10 +51,10 @@ jobs:
           command: |
             cd ${{env.REPO_NAME}}
             touch .env
-            echo TOKEN=${{env.POWPOW_TOKEN}} > .env
-            echo GUILD_ID=${{env.GUILD_ID}} > .env
-            echo OPENAI_API_KEY=${{env.OPENAI_KEY}} > .env
-            echo CLIENT_ID=${{env.POWPOW_DISCORD_ID}} > .env
+            cat TOKEN=${{env.POWPOW_TOKEN}} > .env
+            cat GUILD_ID=${{env.GUILD_ID}} > .env
+            cat OPENAI_API_KEY=${{env.OPENAI_KEY}} > .env
+            cat CLIENT_ID=${{env.POWPOW_DISCORD_ID}} > .env
             echo $?
           host: ${{secrets.HOST}}
           user: root
