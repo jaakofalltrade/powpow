@@ -1,8 +1,9 @@
-import { serverConfig } from "./utils/serverConfig";
 import { discordClient } from "./api/discordClient";
 import { DiscordCommands } from "./models/DiscordCommands";
 import { getOpenaiAnswer } from "./openai/getOpenaiAnswer";
+import { getChatCompletionMessage } from "./utils/getChatCompletionMessage";
 import { getMessageHistory } from "./utils/getMessageHistory";
+import { serverConfig } from "./utils/serverConfig";
 
 discordClient.on("interactionCreate", async (interaction) => {
   // If not a slash command no-op
@@ -13,15 +14,19 @@ discordClient.on("interactionCreate", async (interaction) => {
       interaction.reply("Hello!");
       break;
     case DiscordCommands.ASK:
-      const question = interaction.options.get("question");
-      if (!question?.value) return;
+      const option = interaction.options.get("question");
+      if (!option?.value) return;
       const messageHistory = await getMessageHistory(interaction);
-      interaction.reply(`${interaction.member?.user}: "${question.value}"`);
+      interaction.reply(`${interaction.member?.user} said "${option.value}"`);
 
       interaction.channel?.sendTyping();
       const openaiAnswer = await getOpenaiAnswer({
-        question: question.value as string,
-        previousQuestions: messageHistory,
+        messages: [
+          ...messageHistory,
+          getChatCompletionMessage.fromDiscordInteractionOption({
+            option: option,
+          }),
+        ],
       });
       if (!openaiAnswer) return;
       console.log(openaiAnswer.content);
