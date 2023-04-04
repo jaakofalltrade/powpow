@@ -1,24 +1,25 @@
 import { Interaction } from "discord.js";
-import { cleanMessageText } from "./cleanMessageText";
+import { ChatCompletionRequestMessage } from "openai";
+import { getChatCompletionMessage } from "./getChatCompletionMessage";
 
 export const getMessageHistory = async (
   interaction: Interaction
-): Promise<string[]> => {
+): Promise<ChatCompletionRequestMessage[]> => {
   const messageHistory = await interaction.channel?.messages.fetch({
-    limit: 25,
+    limit: 15,
   });
 
   if (!messageHistory) return [];
 
   const messageHistoryList = [...messageHistory.values()];
 
-  let filteredMessages: string[] = [];
+  let filteredMessages: ChatCompletionRequestMessage[] = [];
 
-  for (const item of messageHistoryList) {
-    console.log(item.content);
-    if (![...item.mentions.users.keys()].length) continue;
-    filteredMessages.push(item.content);
+  for (const message of messageHistoryList) {
+    filteredMessages.push(
+      getChatCompletionMessage.fromDiscordMessage({ message })
+    );
   }
-  filteredMessages.reverse();
-  return cleanMessageText({ messageHistory: filteredMessages });
+
+  return filteredMessages.reverse();
 };
