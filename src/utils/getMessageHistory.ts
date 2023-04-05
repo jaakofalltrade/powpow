@@ -6,7 +6,7 @@ export const getMessageHistory = async (
   interaction: Interaction
 ): Promise<ChatCompletionRequestMessage[]> => {
   const messageHistory = await interaction.channel?.messages.fetch({
-    limit: 15,
+    limit: 10,
   });
 
   if (!messageHistory) return [];
@@ -16,6 +16,7 @@ export const getMessageHistory = async (
   let filteredMessages: ChatCompletionRequestMessage[] = [];
 
   for (const message of messageHistoryList) {
+    if (!message.content || !message.content.length) continue;
     filteredMessages.push(
       getChatCompletionMessage.fromDiscordMessage({ message })
     );
