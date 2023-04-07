@@ -44,7 +44,7 @@ jobs:
           command: |
             cd ${{env.REPO_NAME}}
             npm run build
-            npm start:prod
+            npm run start:prod
           host: ${{secrets.HOST}}
           user: root
           key: ${{secrets.SSH_PRIVATE_KEY}}
