@@ -9,7 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install
-      - run: apt install nodejs -y
-      - run: apt install npm -y
       - run: npm install -g typescript
       - run: npm run build
