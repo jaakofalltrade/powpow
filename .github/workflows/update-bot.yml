@@ -5,7 +5,20 @@ on:
 env:
   REPO_NAME: ${{ github.event.repository.name }}
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:18
+    steps:
+      - uses: actions/checkout@v3
+      - id: build
+      - run: npm install
+      - run: apt install nodejs -y
+      - run: apt install npm -y
+      - run: npm install -g typescript
+      - run: npm run build
+
   deploy-to-vultr:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -44,6 +57,7 @@ jobs:
           command: |
             cd ${{env.REPO_NAME}}
             npm run build
+            npm run stop:prod
             npm run start:prod
           host: ${{secrets.HOST}}
           user: root

@@ -7,7 +7,8 @@
     "start": "nodemon src/index.ts",
     "register-commands": "ts-node src/scripts/register-commands.ts",
     "build": "tsc",
-    "start:prod": "pm2 start build/index.js --watch"
+    "start:prod": "pm2 start build/index.js --watch",
+    "stop:prod": "pm2 stop index"
   },
   "repository": {
     "type": "git",

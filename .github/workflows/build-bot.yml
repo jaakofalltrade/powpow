@@ -1,0 +1,16 @@
+name: Update
+on: pull-request
+env:
+  REPO_NAME: ${{ github.event.repository.name }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:18
+    steps:
+      - uses: actions/checkout@v3
+      - id: build
+      - run: npm install
+      - run: apt install nodejs -y
+      - run: apt install npm -y
+      - run: npm install -g typescript
+      - run: npm run build
