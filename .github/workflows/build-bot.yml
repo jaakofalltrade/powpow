@@ -1,5 +1,5 @@
 name: Update
-on: pull-request
+on: pull_request
 env:
   REPO_NAME: ${{ github.event.repository.name }}
 jobs:
