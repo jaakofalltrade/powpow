@@ -23,6 +23,7 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
 
   deploy-to-vultr:
+    needs: [install-requirements]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -72,6 +73,8 @@ jobs:
           command: |
             cd ${{env.REPO_NAME}}
             npm install
+            npm run build
+            npm run start:prod
           host: ${{secrets.HOST}}
           user: root
           key: ${{secrets.SSH_PRIVATE_KEY}}
