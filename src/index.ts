@@ -1,4 +1,6 @@
 import { discordClient } from "./api/discordClient";
+import { ask } from "./events/ask";
+import { image } from "./events/image";
 import { DiscordCommands } from "./models/DiscordCommands";
 import { getOpenaiAnswer } from "./openai/getOpenaiAnswer";
 import { getChatCompletionMessage } from "./utils/getChatCompletionMessage";
@@ -14,23 +16,10 @@ discordClient.on("interactionCreate", async (interaction) => {
       interaction.reply("Hello!");
       break;
     case DiscordCommands.ASK:
-      const option = interaction.options.get("question");
-      if (!option?.value) return;
-      const messageHistory = await getMessageHistory(interaction);
-      interaction.reply(`${interaction.member?.user} said "${option.value}"`);
-
-      interaction.channel?.sendTyping();
-      const openaiAnswer = await getOpenaiAnswer({
-        messages: [
-          ...messageHistory,
-          getChatCompletionMessage.fromDiscordInteractionOption({
-            option: option,
-          }),
-        ],
-      });
-      if (!openaiAnswer) return;
-      console.log(openaiAnswer.content);
-      interaction.channel?.send(openaiAnswer?.content);
+      ask({ interaction });
+      break;
+    case DiscordCommands.IMAGE:
+      image({ interaction });
       break;
     default:
       interaction.reply("Sorry I do not understand what you are saying.");

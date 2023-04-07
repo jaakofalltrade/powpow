@@ -18,6 +18,18 @@ const commands = [
       },
     ],
   },
+  {
+    name: "image",
+    description: "Ask our bot Powpow to create a text based image.",
+    options: [
+      {
+        name: "image",
+        description: "Image prompt for Powpow.",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(serverConfig.token ?? "");
