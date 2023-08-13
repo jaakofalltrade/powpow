@@ -21,7 +21,7 @@ export const ask = async (args: {
       }),
     ],
   });
-  if (!openaiAnswer) return;
+  if (!openaiAnswer?.content) return;
   console.log(openaiAnswer.content);
-  interaction.channel?.send(openaiAnswer?.content);
+  interaction.channel?.send(openaiAnswer.content);
 };
