@@ -1,2 +1,2 @@
 # powpow
-Powpow is multi purpose discord bot.
+Powpow is a discord bot using OpenAI's chat-gpt model.
